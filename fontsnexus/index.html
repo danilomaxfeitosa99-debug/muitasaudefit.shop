@@ -1,1 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonts Nexus — Gestão de Tráfego Pago</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#0B0E14;
+    --panel:#12161F;
+    --panel-2:#1A2030;
+    --line:#262E40;
+    --off:#EDEFF3;
+    --slate:#8991A4;
+    --blue:#3D6BFF;
+    --amber:#FFB454;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--off);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.wordmark{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(11,14,20,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .wordmark{font-size:19px;color:var(--off);}
+  .wordmark span{color:var(--blue);}
+  .nav-links{display:flex;gap:36px;font-size:14.5px;color:var(--slate);}
+  .nav-links a:hover{color:var(--off);}
+  .nav-cta{
+    font-size:14.5px;
+    color:var(--ink);
+    background:var(--off);
+    padding:10px 18px;
+    border-radius:var(--radius);
+  }
+  .nav-cta:hover{background:var(--blue);color:#fff;}
+  .menu-toggle{display:none;}
+
+  /* HERO */
+  .hero{
+    padding:96px 0 88px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:end;
+  }
+  .eyebrow{
+    font-size:14px;color:var(--amber);margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(38px,5vw,58px);
+    line-height:1.05;
+    max-width:14ch;
+  }
+  .hero p.lede{
+    margin-top:24px;
+    font-size:18px;
+    color:var(--slate);
+    max-width:46ch;
+  }
+  .hero-actions{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--blue);color:#fff;padding:14px 26px;
+    border-radius:var(--radius);font-size:15px;font-weight:500;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:#2B54E0;}
+  .btn-ghost{
+    border:1px solid var(--line);color:var(--off);
+    padding:14px 26px;border-radius:var(--radius);font-size:15px;
+    display:inline-block;
+  }
+  .btn-ghost:hover{border-color:var(--off);}
+
+  .chart-card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px;
+  }
+  .chart-card .label{font-size:13px;color:var(--slate);margin-bottom:4px;}
+  .chart-card .figure{font-size:34px;font-family:'Space Grotesk';color:var(--off);}
+  .chart-card .figure small{font-size:16px;color:#5FD98A;font-family:'IBM Plex Sans';margin-left:8px;}
+  svg#growthline{width:100%;height:120px;margin-top:14px;display:block;}
+  #growthline path.line{
+    stroke:var(--blue);stroke-width:2.5;fill:none;
+    stroke-dasharray:600;stroke-dashoffset:600;
+    animation:draw 1.8s ease-out forwards 0.3s;
+  }
+  #growthline path.fill{fill:url(#gradFill);opacity:0;animation:fadein 1s ease-out forwards 1.4s;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadein{to{opacity:1;}}
+  @media (prefers-reduced-motion: reduce){
+    #growthline path.line{animation:none;stroke-dashoffset:0;}
+    #growthline path.fill{animation:none;opacity:1;}
+  }
+
+  /* SECTION HEADS */
+  section{padding:88px 0;border-bottom:1px solid var(--line);}
+  .section-head{max-width:56ch;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,36px);}
+  .section-head p{color:var(--slate);margin-top:14px;font-size:16.5px;}
+
+  /* SERVICES */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .service{background:var(--ink);padding:34px 30px;}
+  .service h3{font-size:19px;margin-bottom:12px;}
+  .service p{color:var(--slate);font-size:15px;margin:0;}
+  .service .tag{font-size:13px;color:var(--blue);margin-bottom:14px;display:block;}
+
+  /* PROCESS */
+  .process-list{counter-reset:step;border-top:1px solid var(--line);}
+  .step{
+    counter-increment:step;
+    display:grid;grid-template-columns:64px 1fr;gap:24px;
+    padding:28px 0;border-bottom:1px solid var(--line);
+  }
+  .step::before{
+    content:counter(step,decimal-leading-zero);
+    font-family:'Space Grotesk';font-size:22px;color:var(--slate);
+  }
+  .step h3{font-size:18px;margin-bottom:8px;}
+  .step p{color:var(--slate);font-size:15px;margin:0;max-width:60ch;}
+
+  /* STATS */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+  .stat .num{font-family:'Space Grotesk';font-size:38px;color:var(--off);}
+  .stat .num span{color:var(--blue);}
+  .stat .desc{color:var(--slate);font-size:14px;margin-top:6px;}
+
+  /* ABOUT */
+  .about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .about-wrap p{color:var(--slate);font-size:16px;margin-top:16px;}
+  .about-wrap h2{font-size:clamp(26px,3vw,32px);max-width:14ch;}
+
+  /* CONTACT */
+  #contato{border-bottom:none;}
+  .contact-card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:56px;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:48px;
+  }
+  .contact-card h2{font-size:clamp(26px,3vw,32px);max-width:12ch;}
+  .contact-card p{color:var(--slate);margin-top:14px;font-size:16px;max-width:42ch;}
+  .contact-details{border-left:1px solid var(--line);padding-left:48px;}
+  .contact-details .row{margin-bottom:22px;}
+  .contact-details .k{font-size:13px;color:var(--slate);margin-bottom:4px;}
+  .contact-details .v{font-size:16px;}
+  .contact-details a.v:hover{color:var(--blue);}
+
+  /* FOOTER */
+  footer{padding:36px 0;}
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13.5px;color:var(--slate);flex-wrap:wrap;gap:12px;
+  }
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .hero .wrap{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .about-wrap{grid-template-columns:1fr;}
+    .contact-card{grid-template-columns:1fr;padding:36px 24px;}
+    .contact-details{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#topo" class="wordmark">Fonts<span>Nexus</span></a>
+    <div class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#metodo">Método</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <a href="#contato" class="nav-cta">Falar com a agência</a>
+  </nav>
+</header>
+
+<main id="topo">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Gestão de tráfego pago</div>
+        <h1>Mídia paga que se paga sozinha</h1>
+        <p class="lede">A Fonts Nexus estrutura, executa e otimiza campanhas em Meta Ads, Google Ads e TikTok Ads com uma única meta: transformar orçamento de mídia em receita rastreável.</p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn-primary">Solicitar diagnóstico</a>
+          <a href="#servicos" class="btn-ghost">Ver serviços</a>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="label">ROAS médio em contas ativas</div>
+        <div class="figure">4.8x <small>↑ últimos 90 dias</small></div>
+        <svg id="growthline" viewBox="0 0 300 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="gradFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3D6BFF" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#3D6BFF" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="fill" d="M0,80 L20,74 L50,78 L80,60 L110,66 L140,44 L170,50 L200,28 L230,34 L260,14 L300,18 L300,100 L0,100 Z"/>
+          <path class="line" d="M0,80 L20,74 L50,78 L80,60 L110,66 L140,44 L170,50 L200,28 L230,34 L260,14 L300,18"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>O que a gente faz</h2>
+        <p>Cada frente existe para resolver uma parte específica da máquina de aquisição: da estrutura de conta ao criativo que converte.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service">
+          <span class="tag">Meta Ads</span>
+          <h3>Aquisição em Instagram e Facebook</h3>
+          <p>Estrutura de campanhas por funil, testes de criativo em escala e otimização contínua de CPA.</p>
+        </div>
+        <div class="service">
+          <span class="tag">Google Ads</span>
+          <h3>Busca, Shopping e Performance Max</h3>
+          <p>Captura de demanda ativa com controle de termos de busca, feed de produtos e lances por conversão.</p>
+        </div>
+        <div class="service">
+          <span class="tag">TikTok Ads</span>
+          <h3>Criativo nativo para topo de funil</h3>
+          <p>Produção e teste de vídeos no formato da plataforma, com curva de aprendizado acelerada.</p>
+        </div>
+        <div class="service">
+          <span class="tag">Rastreamento</span>
+          <h3>Tracking e atribuição</h3>
+          <p>Implementação de pixels, CAPI e UTMs consistentes para que cada real investido tenha origem clara.</p>
+        </div>
+        <div class="service">
+          <span class="tag">Landing pages</span>
+          <h3>Páginas de conversão</h3>
+          <p>Construção e teste A/B de páginas focadas em uma única ação, alinhadas ao criativo que trouxe o clique.</p>
+        </div>
+        <div class="service">
+          <span class="tag">Relatórios</span>
+          <h3>Painel de resultados</h3>
+          <p>Dashboard semanal com investimento, retorno e próximos passos, sem depender de planilha manual.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="metodo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Como trabalhamos</h2>
+        <p>Um processo fixo, repetido em toda conta nova, para que o resultado dependa do método e não da sorte.</p>
+      </div>
+      <div class="process-list">
+        <div class="step">
+          <h3>Diagnóstico de conta</h3>
+          <p>Auditoria de campanhas existentes, tracking e histórico de gasto para identificar onde o orçamento está vazando.</p>
+        </div>
+        <div class="step">
+          <h3>Estrutura de campanhas</h3>
+          <p>Organização por objetivo e etapa de funil, com metas de CPA e ROAS definidas antes do primeiro real investido.</p>
+        </div>
+        <div class="step">
+          <h3>Produção de criativos</h3>
+          <p>Roteiro, briefing e validação de peças com o time interno ou com o parceiro de conteúdo do cliente.</p>
+        </div>
+        <div class="step">
+          <h3>Otimização semanal</h3>
+          <p>Leitura de dados, corte de anúncios de baixo desempenho e escala do que está performando.</p>
+        </div>
+        <div class="step">
+          <h3>Relatório e próximos passos</h3>
+          <p>Reunião quinzenal com números consolidados e plano de ação para o ciclo seguinte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultados">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="num"><span>+</span>40</div>
+          <div class="desc">contas de mídia paga geridas</div>
+        </div>
+        <div class="stat">
+          <div class="num">4.8<span>x</span></div>
+          <div class="desc">ROAS médio nas contas ativas</div>
+        </div>
+        <div class="stat">
+          <div class="num">3</div>
+          <div class="desc">plataformas de anúncio operadas</div>
+        </div>
+        <div class="stat">
+          <div class="num">15<span>d</span></div>
+          <div class="desc">ciclo de otimização por conta</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap about-wrap">
+      <h2>Uma agência de tráfego, sem enrolação</h2>
+      <div>
+        <p>A Fonts Nexus nasceu para atender negócios que já vendem, mas querem depender menos de indicação e mais de um canal de aquisição previsível.</p>
+        <p>Trabalhamos com um número limitado de contas por vez, o que mantém cada campanha sob acompanhamento direto do time responsável — sem terceirização de gestão e sem caixa-preta nos números.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact-card">
+        <div>
+          <h2>Vamos falar sobre sua conta de anúncios</h2>
+          <p>Envie um e-mail contando o estágio atual da sua operação de mídia paga. Respondemos com os próximos passos do diagnóstico.</p>
+          <a href="mailto:fontsnexus@gmail.com" class="btn-primary" style="margin-top:24px;">Enviar e-mail</a>
+        </div>
+        <div class="contact-details">
+          <div class="row">
+            <div class="k">E-mail</div>
+            <a class="v" href="mailto:fontsnexus@gmail.com">fontsnexus@gmail.com</a>
+          </div>
+          <div class="row">
+            <div class="k">CNPJ</div>
+            <div class="v">67.232.158/0001-68</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Fonts Nexus. Todos os direitos reservados.</div>
+    <div>CNPJ 67.232.158/0001-68</div>
+  </div>
+</footer>
+
+</body>
+</html>
 
